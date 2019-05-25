@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config=webpack.config-dev.js --hot --inline",
-    "format": "prettier --write  ./src/**/*.jsx"
+    "format": "prettier --write  ./src/**/*.jsx",
+    "storybook": "start-storybook -p 3005"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +37,11 @@
     "style-loader": "0.18.2"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.0.1",
+    "@storybook/addon-knobs": "^5.0.1",
+    "@storybook/addon-notes": "^5.0.1",
+    "@storybook/addons": "^5.0.1",
+    "@storybook/react": "^5.0.1",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "9.0.0",
