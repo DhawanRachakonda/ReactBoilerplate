@@ -11,12 +11,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@americanexpress/purgecss-loader": "^1.0.0",
+    "autoprefixer": "^9.5.1",
     "axios": "0.18.0",
     "babel-polyfill": "^6.0.16",
+    "css-loader": "^2.1.1",
     "dotenv-webpack": "^1.7.0",
     "eslint-plugin-jsx-control-statements": "^2.2.1",
     "jsx-control-statements": "^3.2.8",
+    "postcss-loader": "2.0.6",
     "prop-types": "15.6.2",
+    "purgecss-webpack-plugin": "^1.5.0",
     "query-string": "6.1.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
@@ -26,7 +31,9 @@
     "redux": "4.0.0",
     "redux-devtools-extension": "^2.13.7",
     "redux-promise-middleware": "^5.1.1",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "sass-loader": "6.0.6",
+    "style-loader": "0.18.2"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
@@ -59,7 +66,7 @@
     "html-webpack-plugin": "3.2.0",
     "husky": "0.14.3",
     "lint-staged": "7.2.2",
-    "mini-css-extract-plugin": "0.4.2",
+    "mini-css-extract-plugin": "^0.6.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "prettier": "1.14.2",
     "pretty-quick": "1.6.0",

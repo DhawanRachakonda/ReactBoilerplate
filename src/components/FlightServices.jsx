@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ActionButton from './ActionButton.jsx';
+import flightServicesCss from '../../assets/css/flightServices.css';
 
 function ListFlights({ flightsList }) {
   return (
@@ -59,7 +60,7 @@ class FlightServices extends React.Component {
         {this.state.flights.length > 0 && (
           <ListFlights flightsList={this.state.flights} />
         )}
-        <h3 className="margin-top--20px">Add Flight</h3>
+        <h3 className={flightServicesCss.margintop}>Add Flight</h3>
         <form>
           <input
             type="text"

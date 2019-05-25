@@ -2,11 +2,17 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 const commonPaths = require('./paths');
 
 const PUBLIC_DOMAIN = 'localhost';
 const THIS_SERVER_NAME = 'localhost';
+
+const MiniCssPlugin = new MiniCssExtractPlugin({
+  filename: "[name].css",
+});
 
 module.exports = {
   mode: 'development',
@@ -34,14 +40,50 @@ module.exports = {
         exclude: /(node_modules)/,
       },
       {
+        test: /\.scss/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+      {
         test: /\.css$/,
         use: [
-          'style-loader',
           {
-            loader: 'css-loader',
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              sourceMap: true,
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
+              hmr: process.env.NODE_ENV === 'development',
             },
+          },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              camelCase: true,
+              importLoaders: 1,
+              localIdentName: "[name]--[local]--[hash:base64:5]"
+            }
+          },
+          {
+            loader: '@americanexpress/purgecss-loader',
+            options: {
+              paths: [path.join(__dirname, 'src/**/*.{js,jsx}')],
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: () => [require("autoprefixer")()],
+            }
           },
         ],
       },
@@ -56,6 +98,7 @@ module.exports = {
       template: commonPaths.templatePath,
     }),
     new CopyWebpackPlugin([{ from: 'assets', to: 'assets' }]),
+    MiniCssPlugin,
     new Dotenv({
       path: './.env.dev', // load this now instead of the ones in '.env'
       safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
